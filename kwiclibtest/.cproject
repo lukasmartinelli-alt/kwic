@@ -26,9 +26,8 @@
 								<option id="gnu.cpp.compiler.option.include.paths.730715734" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/kwiclibtest/cute}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/kwiclibtest/boost}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/kwiclib}&quot;"/>
 								</option>
-								<option id="gnu.cpp.compiler.option.dialect.std.1229860274" superClass="gnu.cpp.compiler.option.dialect.std" value="gnu.cpp.compiler.dialect.c++11" valueType="enumerated"/>
+								<option id="gnu.cpp.compiler.option.dialect.std.1229860274" name="Language standard" superClass="gnu.cpp.compiler.option.dialect.std" value="gnu.cpp.compiler.dialect.c++11" valueType="enumerated"/>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.900086629" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.c.compiler.exe.debug.1466799515" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.exe.debug">
@@ -37,7 +36,6 @@
 								<option id="gnu.c.compiler.option.include.paths.179604024" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/kwiclibtest/cute}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/kwiclibtest/boost}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/kwiclib}&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1353312368" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
@@ -52,12 +50,9 @@
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.exe.debug.1053310293" name="GCC C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.exe.debug">
 								<option id="gnu.cpp.link.option.paths.636433819" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/kwiclib/Debug}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/kwiclib/Debug Gcov}&quot;"/>
 								</option>
-								<option id="gnu.cpp.link.option.libs.852371767" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs">
-									<listOptionValue builtIn="false" value="kwiclib"/>
-								</option>
+								<option id="gnu.cpp.link.option.libs.852371767" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs"/>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.1977105109" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
@@ -67,7 +62,6 @@
 								<option id="gnu.both.asm.option.include.paths.460346160" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/kwiclibtest/cute}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/kwiclibtest/boost}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/kwiclib}&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.447008138" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
 							</tool>

@@ -41,13 +41,13 @@ endif
 all: kwiclibtest
 
 dependents:
-	-cd ../../kwiclib/Debug\ Gcov && $(MAKE) all
+	-cd ../../kwiclib/Debug && $(MAKE) clean all
 
 # Tool invocations
-kwiclibtest: $(OBJS) $(USER_OBJS) ../../kwiclib/Debug\ Gcov/libkwiclib.a
+kwiclibtest: $(OBJS) $(USER_OBJS) ../../kwiclib/Debug/libkwiclib.a
 	@echo 'Building target: $@'
 	@echo 'Invoking: GCC C++ Linker'
-	g++ -L"../../kwiclib/Debug Gcov" -o "kwiclibtest" $(OBJS) $(USER_OBJS) $(LIBS)
+	g++ -L"../../kwiclib/Debug" -o "kwiclibtest" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -58,6 +58,6 @@ clean:
 
 .PHONY: all clean dependents
 .SECONDARY:
-../../kwiclib/Debug\ Gcov/libkwiclib.a:
+../../kwiclib/Debug/libkwiclib.a:
 
 -include ../makefile.targets

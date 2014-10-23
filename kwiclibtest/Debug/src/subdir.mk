@@ -17,7 +17,7 @@ CPP_DEPS += \
 src/%.o: ../src/%.cpp
 	@echo 'Building file: $<'
 	@echo 'Invoking: GCC C++ Compiler'
-	g++ -std=c++0x -I"/home/morgenkaffee/Projects/kwic/kwiclibtest/cute" -I"/home/morgenkaffee/Projects/kwic/kwiclibtest/boost" -I"/home/morgenkaffee/Projects/kwic/kwiclib" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o "$@" "$<"
+	g++ -std=c++0x -I"../cute" -I"../boost" -I"../../kwiclib" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 

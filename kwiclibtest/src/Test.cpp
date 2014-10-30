@@ -5,7 +5,46 @@
 #include <sstream>
 #include <stdexcept>
 #include "word.h"
-#include "kwic.h"
+
+
+void testWordsWithLessThanOperator(){
+	//Arrange
+	Word word1("abc");
+	Word word2("bcd");
+	//Assert
+	ASSERT_LESS(word1, word2);
+}
+
+void testWordsWithLessThanOperatorIgnoringLetterCase(){
+	//Arrange
+	Word word1("abc");
+	Word word2("BCD");
+	//Assert
+	ASSERT_LESS(word1, word2);
+}
+
+void testPrintValueOfWord() {
+	//Arrange
+	std::ostringstream out {};
+	Word word("hallo");
+
+	//Act
+	out << word;
+
+	//Assert
+	ASSERT_EQUAL("hallo", out.str());
+
+}
+
+void constructWordThrowsInvalidArgumentExceptionForNumberInWord() {
+	//Assert
+	ASSERT_THROWS(Word("124abd"),std::invalid_argument);
+}
+
+void constructWordThrowsInvalidArgumentExceptionForSpecialCharacters() {
+	//Assert
+	ASSERT_THROWS(Word("dsl!*%"), std::invalid_argument);
+}
 
 void wordConsistsOfOnlyLetters() {
 	//Arrange
@@ -47,6 +86,7 @@ void wordsAreDelimitedByNonAlphanumericCharacters() {
 	ASSERT_EQUAL(std::string {"weird"}, word3.value);
 }
 
+
 /*
 void permuteWordList() {
 	//Arrange
@@ -82,6 +122,11 @@ void runAllTests(int argc, char const *argv[]){
 	s.push_back(CUTE(wordConsistsOfOnlyLetters));
 	s.push_back(CUTE(wordsAreDelimitedByNonAlphanumericCharacters));
 	s.push_back(CUTE(emptyWordIfStreamIsEmpty));
+	s.push_back(CUTE(constructWordThrowsInvalidArgumentExceptionForNumberInWord));
+	s.push_back(CUTE(constructWordThrowsInvalidArgumentExceptionForSpecialCharacters));
+	s.push_back(CUTE(testPrintValueOfWord));
+	s.push_back(CUTE(testWordsWithLessThanOperator));
+	s.push_back(CUTE(testWordsWithLessThanOperatorIgnoringLetterCase));
 	//s.push_back(CUTE(permuteWordList));
 
 	cute::xml_file_opener xmlfile(argc,argv);

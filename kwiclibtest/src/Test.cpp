@@ -2,9 +2,10 @@
 #include "ide_listener.h"
 #include "xml_listener.h"
 #include "cute_runner.h"
-#include "word.h"
 #include <sstream>
 #include <stdexcept>
+#include "word.h"
+#include "kwic.h"
 
 void wordConsistsOfOnlyLetters() {
 	//Arrange
@@ -14,10 +15,7 @@ void wordConsistsOfOnlyLetters() {
 	in >> word;
 
 	//Assert
-	ASSERT_EQUAL(3, word.characters.size());
-	ASSERT_EQUAL('a', word.characters.at(0));
-	ASSERT_EQUAL('b', word.characters[1]);
-	ASSERT_EQUAL('c', word.characters[2]);
+	ASSERT_EQUAL(std::string {"abc"}, word.value);
 }
 
 void emptyWordIfStreamIsEmpty() {
@@ -29,7 +27,7 @@ void emptyWordIfStreamIsEmpty() {
 	in >> word;
 
 	//Assert
-	ASSERT_EQUAL(0, word.characters.size());
+	ASSERT_EQUAL(0, word.value.length());
 }
 
 
@@ -44,26 +42,39 @@ void wordsAreDelimitedByNonAlphanumericCharacters() {
 	in >> word3;
 
 	//Assert
-	ASSERT_EQUAL(5, word1.characters.size());
-	ASSERT_EQUAL('c', word1.characters.at(0));
-	ASSERT_EQUAL('o', word1.characters.at(1));
-	ASSERT_EQUAL('m', word1.characters.at(2));
-	ASSERT_EQUAL('p', word1.characters.at(3));
-	ASSERT_EQUAL('l', word1.characters.at(4));
-
-	ASSERT_EQUAL(4, word2.characters.size());
-	ASSERT_EQUAL('t', word2.characters.at(0));
-	ASSERT_EQUAL('e', word2.characters.at(1));
-	ASSERT_EQUAL('l', word2.characters.at(2));
-	ASSERT_EQUAL('y', word2.characters.at(3));
-
-	ASSERT_EQUAL(5, word3.characters.size());
-	ASSERT_EQUAL('w', word3.characters.at(0));
-	ASSERT_EQUAL('e', word3.characters.at(1));
-	ASSERT_EQUAL('i', word3.characters.at(2));
-	ASSERT_EQUAL('r', word3.characters.at(3));
-	ASSERT_EQUAL('d', word3.characters.at(4));
+	ASSERT_EQUAL(std::string {"compl"}, word1.value);
+	ASSERT_EQUAL(std::string {"tely"}, word2.value);
+	ASSERT_EQUAL(std::string {"weird"}, word3.value);
 }
+
+/*
+void permuteWordList() {
+	//Arrange
+	Word word1 ("this");
+	Word word2 ("is");
+	Word word3 ("a");
+	Word word4 ("test");
+
+	Word word1 {}, word2 {}, word3 {}, word4 {};
+	std::istringstream in {"this is a test"};
+
+	in >> word1;
+	in >> word2;
+	in >> word3;
+	in >> word4;
+
+	std::vector<Word> words {word1, word2, word3, word4};
+
+	//Act
+	std::vector<std::vector<Word>> permuted = permuteWords(words);
+
+	//Assert
+	ASSERT_EQUAL(std::string {"test", "this", "is", "a"}, permuted.at(0));
+	ASSERT_EQUAL(std::string {"this", "is", "a", "test"}, permuted.at(1));
+	ASSERT_EQUAL(std::string {"is", "a", "test", "this"}, permuted.at(2));
+	ASSERT_EQUAL(std::string {"a", "test", "this", "is"}, permuted.at(3));
+}
+*/
 
 void runAllTests(int argc, char const *argv[]){
 	cute::suite s;
@@ -71,6 +82,7 @@ void runAllTests(int argc, char const *argv[]){
 	s.push_back(CUTE(wordConsistsOfOnlyLetters));
 	s.push_back(CUTE(wordsAreDelimitedByNonAlphanumericCharacters));
 	s.push_back(CUTE(emptyWordIfStreamIsEmpty));
+	//s.push_back(CUTE(permuteWordList));
 
 	cute::xml_file_opener xmlfile(argc,argv);
 	cute::xml_listener<cute::ide_listener<> >  lis(xmlfile.out);

@@ -3,6 +3,9 @@
 *.lo
 *.o
 *.obj
+*.swp
+.metadata
+kwiclibtest.xml
 
 # Precompiled Headers
 *.gch

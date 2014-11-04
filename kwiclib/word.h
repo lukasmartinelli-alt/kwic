@@ -36,10 +36,9 @@ inline std::istream& operator>>(std::istream& lhs, Word & rhs){
 	return lhs;
 }
 
-inline std::ostream& operator<<(std::ostream& out, Word &word){
+inline std::ostream& operator<<(std::ostream& out, Word const& word){
 	out << word.value;
 	return out;
 }
-
 
 #endif

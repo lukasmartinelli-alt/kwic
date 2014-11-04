@@ -5,6 +5,7 @@
 #include <sstream>
 #include <stdexcept>
 #include "word.h"
+#include "kwic.h"
 
 
 void testWordsWithLessThanOperator(){
@@ -86,15 +87,12 @@ void wordsAreDelimitedByNonAlphanumericCharacters() {
 	ASSERT_EQUAL(std::string {"weird"}, word3.value);
 }
 
-
-/*
 void permuteWordList() {
 	//Arrange
-	Word word1 ("this");
-	Word word2 ("is");
-	Word word3 ("a");
-	Word word4 ("test");
-
+	Word mockWord1 ("this");
+	Word mockWord2 ("is");
+	Word mockWord3 ("a");
+	Word mockWord4 ("test");
 	Word word1 {}, word2 {}, word3 {}, word4 {};
 	std::istringstream in {"this is a test"};
 
@@ -109,15 +107,30 @@ void permuteWordList() {
 	std::vector<std::vector<Word>> permuted = permuteWords(words);
 
 	//Assert
-	ASSERT_EQUAL(std::string {"test", "this", "is", "a"}, permuted.at(0));
-	ASSERT_EQUAL(std::string {"this", "is", "a", "test"}, permuted.at(1));
-	ASSERT_EQUAL(std::string {"is", "a", "test", "this"}, permuted.at(2));
-	ASSERT_EQUAL(std::string {"a", "test", "this", "is"}, permuted.at(3));
+	ASSERT_EQUAL(mockWord2,permuted.at(0).at(0)); //is a test this
+	ASSERT_EQUAL(mockWord3,permuted.at(0).at(1));
+	ASSERT_EQUAL(mockWord4,permuted.at(0).at(2));
+	ASSERT_EQUAL(mockWord1,permuted.at(0).at(3));
+
+	ASSERT_EQUAL(mockWord3,permuted.at(1).at(0)); // a test this is
+	ASSERT_EQUAL(mockWord4,permuted.at(1).at(1));
+	ASSERT_EQUAL(mockWord1,permuted.at(1).at(2));
+	ASSERT_EQUAL(mockWord2,permuted.at(1).at(3));
+
+	ASSERT_EQUAL(mockWord4,permuted.at(2).at(0)); // test this is a
+	ASSERT_EQUAL(mockWord1,permuted.at(2).at(1));
+	ASSERT_EQUAL(mockWord2,permuted.at(2).at(2));
+	ASSERT_EQUAL(mockWord3,permuted.at(2).at(3));
+
+	ASSERT_EQUAL(mockWord1,permuted.at(3).at(0)); // this is a test
+	ASSERT_EQUAL(mockWord2,permuted.at(3).at(1));
+	ASSERT_EQUAL(mockWord3,permuted.at(3).at(2));
+	ASSERT_EQUAL(mockWord4,permuted.at(3).at(3));
 }
-*/
+
 
 void runAllTests(int argc, char const *argv[]){
-	cute::suite s;
+	cute::suite s{};
 
 	s.push_back(CUTE(wordConsistsOfOnlyLetters));
 	s.push_back(CUTE(wordsAreDelimitedByNonAlphanumericCharacters));
@@ -127,7 +140,7 @@ void runAllTests(int argc, char const *argv[]){
 	s.push_back(CUTE(testPrintValueOfWord));
 	s.push_back(CUTE(testWordsWithLessThanOperator));
 	s.push_back(CUTE(testWordsWithLessThanOperatorIgnoringLetterCase));
-	//s.push_back(CUTE(permuteWordList));
+	s.push_back(CUTE(permuteWordList));
 
 	cute::xml_file_opener xmlfile(argc,argv);
 	cute::xml_listener<cute::ide_listener<> >  lis(xmlfile.out);

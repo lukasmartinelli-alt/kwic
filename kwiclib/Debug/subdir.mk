@@ -4,12 +4,15 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
+../kwic.cpp \
 ../word.cpp 
 
 OBJS += \
+./kwic.o \
 ./word.o 
 
 CPP_DEPS += \
+./kwic.d \
 ./word.d 
 
 

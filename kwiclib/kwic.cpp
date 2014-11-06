@@ -31,12 +31,12 @@ void kwic(std::istream &is, std::ostream &os){
 	}
 }
 
-std::vector<std::vector<Word>> permuteWords(std::vector<Word> words) {
-	std::vector<std::vector<Word>> permutations { };
+std::set<std::vector<Word>> permuteWords(std::vector<Word> words) {
+	std::set<std::vector<Word>> permutations { };
 
 	for (auto _ : words) {
 		std::rotate(words.begin(), words.begin() + 1, words.end());
-		permutations.push_back(words);
+		permutations.insert(words);
 	}
 
 	return permutations;

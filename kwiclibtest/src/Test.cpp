@@ -87,6 +87,15 @@ void wordsAreDelimitedByNonAlphanumericCharacters() {
 	ASSERT_EQUAL(std::string {"weird"}, word3.value);
 }
 
+void testWordsAreSortedByStartingWord() {
+	//Arrange
+	std::vector<Word> words1 { Word("this"), Word("is"), Word("a"), Word("test") };
+	std::vector<Word> words2 { Word("a"), Word("test"), Word("this"), Word("is") };
+
+	//Act & Assert
+	ASSERT(words1 < words2);
+}
+
 void permuteSingleSentence() {
 	//Arrange
 	Word mockWord1 ("this");
@@ -161,6 +170,7 @@ void runAllTests(int argc, char const *argv[]){
 	s.push_back(CUTE(testWordsWithLessThanOperatorIgnoringLetterCase));
 	s.push_back(CUTE(permuteSingleSentence));
 	s.push_back(CUTE(permuteMultipleSentence));
+	s.push_back(CUTE(testWordsAreSortedByStartingWord));
 
 	cute::xml_file_opener xmlfile(argc,argv);
 	cute::xml_listener<cute::ide_listener<> >  lis(xmlfile.out);

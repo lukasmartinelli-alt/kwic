@@ -107,25 +107,25 @@ void permuteWordList() {
 	std::vector<std::vector<Word>> permuted = permuteWords(words);
 
 	//Assert
-	ASSERT_EQUAL(mockWord2,permuted.at(0).at(0)); //is a test this
-	ASSERT_EQUAL(mockWord3,permuted.at(0).at(1));
-	ASSERT_EQUAL(mockWord4,permuted.at(0).at(2));
-	ASSERT_EQUAL(mockWord1,permuted.at(0).at(3));
+	ASSERT_EQUAL(mockWord1,permuted.at(0).at(0)); // this is a test
+	ASSERT_EQUAL(mockWord2,permuted.at(0).at(1));
+	ASSERT_EQUAL(mockWord3,permuted.at(0).at(2));
+	ASSERT_EQUAL(mockWord4,permuted.at(0).at(3));
 
-	ASSERT_EQUAL(mockWord3,permuted.at(1).at(0)); // a test this is
-	ASSERT_EQUAL(mockWord4,permuted.at(1).at(1));
-	ASSERT_EQUAL(mockWord1,permuted.at(1).at(2));
-	ASSERT_EQUAL(mockWord2,permuted.at(1).at(3));
+	ASSERT_EQUAL(mockWord2,permuted.at(1).at(0)); //is a test this
+	ASSERT_EQUAL(mockWord3,permuted.at(1).at(1));
+	ASSERT_EQUAL(mockWord4,permuted.at(1).at(2));
+	ASSERT_EQUAL(mockWord1,permuted.at(1).at(3));
 
-	ASSERT_EQUAL(mockWord4,permuted.at(2).at(0)); // test this is a
-	ASSERT_EQUAL(mockWord1,permuted.at(2).at(1));
-	ASSERT_EQUAL(mockWord2,permuted.at(2).at(2));
-	ASSERT_EQUAL(mockWord3,permuted.at(2).at(3));
+	ASSERT_EQUAL(mockWord3,permuted.at(2).at(0)); // a test this is
+	ASSERT_EQUAL(mockWord4,permuted.at(2).at(1));
+	ASSERT_EQUAL(mockWord1,permuted.at(2).at(2));
+	ASSERT_EQUAL(mockWord2,permuted.at(2).at(3));
 
-	ASSERT_EQUAL(mockWord1,permuted.at(3).at(0)); // this is a test
-	ASSERT_EQUAL(mockWord2,permuted.at(3).at(1));
-	ASSERT_EQUAL(mockWord3,permuted.at(3).at(2));
-	ASSERT_EQUAL(mockWord4,permuted.at(3).at(3));
+	ASSERT_EQUAL(mockWord4,permuted.at(3).at(0)); // test this is a
+	ASSERT_EQUAL(mockWord1,permuted.at(3).at(1));
+	ASSERT_EQUAL(mockWord2,permuted.at(3).at(2));
+	ASSERT_EQUAL(mockWord3,permuted.at(3).at(3));
 }
 
 

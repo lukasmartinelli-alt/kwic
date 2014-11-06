@@ -24,7 +24,10 @@ void kwic(std::istream &is, std::ostream &os){
 
 	for(auto sentence : lines) {
 		auto permutations = permuteWords(sentence);
-		copy(permutations.begin(), permutations.end(), std::ostream_iterator<Word>(os, "\n"));
+
+		for(auto permutation : permutations) {
+			os << permutation << "\n";
+		}
 	}
 }
 

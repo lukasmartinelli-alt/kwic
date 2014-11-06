@@ -48,16 +48,4 @@ inline std::ostream& operator<<(std::ostream& out, Word const& word){
 	return out;
 }
 
-inline bool operator<(const std::vector<Word> &lhs, const std::vector<Word> &rhs) {
-	if (lhs.size() == 0 && rhs.size() == 0) {
-		return false;
-	} else if (lhs.size() == 0) {
-		return true;
-	} else if (rhs.size() == 0) {
-		return false;
-	} else {
-		return lhs[0] < rhs[0];
-	}
-}
-
 #endif

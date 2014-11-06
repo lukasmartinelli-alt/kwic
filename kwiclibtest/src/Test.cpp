@@ -87,7 +87,7 @@ void wordsAreDelimitedByNonAlphanumericCharacters() {
 	ASSERT_EQUAL(std::string {"weird"}, word3.value);
 }
 
-void permuteWordList() {
+void permuteSingleSentence() {
 	//Arrange
 	Word mockWord1 ("this");
 	Word mockWord2 ("is");
@@ -128,6 +128,25 @@ void permuteWordList() {
 	ASSERT_EQUAL(mockWord4,permuted.at(3).at(3));
 }
 
+void permuteMultipleSentence(){
+	//Arrange
+	std::istringstream is{"this is a test"};
+	std::ostringstream os{};
+
+	//Act
+	kwic(is, os);
+
+	//Assert
+	ASSERT_EQUAL("is a test this\n"
+				 "a test this is\n"
+				 "test this is a\n"
+				 "this is a test\n"
+			     /*"is another test this\n"
+				 "another test this is\n"
+			     "test this is another\n"
+			     "this is another test"*/, os.str());
+}
+
 
 void runAllTests(int argc, char const *argv[]){
 	cute::suite s{};
@@ -140,7 +159,8 @@ void runAllTests(int argc, char const *argv[]){
 	s.push_back(CUTE(testPrintValueOfWord));
 	s.push_back(CUTE(testWordsWithLessThanOperator));
 	s.push_back(CUTE(testWordsWithLessThanOperatorIgnoringLetterCase));
-	s.push_back(CUTE(permuteWordList));
+	s.push_back(CUTE(permuteSingleSentence));
+	s.push_back(CUTE(permuteMultipleSentence));
 
 	cute::xml_file_opener xmlfile(argc,argv);
 	cute::xml_listener<cute::ide_listener<> >  lis(xmlfile.out);

@@ -37,12 +37,15 @@ void kwic(std::istream &is, std::ostream &os){
 	});
 }
 
+std::vector<std::vector<Word>> permuteWords(const std::vector<Word> words) {
+	std::vector<std::vector<Word>> allPermutations { };
 
-std::vector<std::vector<Word>> permuteWords(std::vector<Word> words){
-	std::vector<std::vector<Word>> permutedVector(words.size(), std::vector<Word>(words.size()));
-	for (unsigned int var = 0; var < words.size(); ++var) {
-		std::rotate_copy(words.begin(), words.begin()+var+1,words.end(), permutedVector.at(var).begin());
+	for (auto it = words.begin(); it != words.end(); ++it) {
+		std::vector<Word> permutedWords(words.size());
+		std::rotate_copy(words.begin(), it, words.end(), permutedWords.begin());
+		allPermutations.push_back(permutedWords);
 	}
-	return permutedVector;
+
+	return allPermutations;
 }
 

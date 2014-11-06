@@ -8,7 +8,6 @@ std::istream& operator>>(std::istream &is, std::vector<Word> &sentence){
 		std::istringstream lineStream{line};
 		using input = std::istream_iterator<Word>;
 		sentence=std::vector<Word>(input(lineStream), input{});
-		std::cout << line;
 	}
 	return is;
 }
@@ -21,13 +20,14 @@ std::ostream& operator<<(std::ostream &os, std::vector<Word> const &sentence){
 void kwic(std::istream &is, std::ostream &os){
 	using input = std::istream_iterator<std::vector<Word>>;
 	std::vector<std::vector<Word>> lines (input(is), input{});
+	std::set<std::vector<Word>> permutedLines;
 
 	for(auto sentence : lines) {
 		auto permutations = permuteWords(sentence);
-
-		for(auto permutation : permutations) {
-			os << permutation << "\n";
-		}
+		permutedLines.insert(permutations.begin(), permutations.end());
+	}
+	for(auto lines : permutedLines){
+		os << lines << "\n";
 	}
 }
 

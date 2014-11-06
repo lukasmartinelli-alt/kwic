@@ -138,7 +138,9 @@ void permuteSingleSentence() {
 
 void permuteMultipleSentence(){
 	//Arrange
-	std::istringstream is{"this is a test"};
+	std::istringstream is{"this is a test\n"
+						  "this is another test"
+	};
 
 	std::ostringstream os{};
 
@@ -147,13 +149,13 @@ void permuteMultipleSentence(){
 
 	//Assert
 	ASSERT_EQUAL("a test this is \n"
+			 	 "another test this is \n"
 			     "is a test this \n"
+				 "is another test this \n"
 				 "test this is a \n"
+		     	 "test this is another \n"
 				 "this is a test \n"
-			     /*"is another test this\n"
-				 "another test this is\n"
-			     "test this is another\n"
-			     "this is another test"*/, os.str());
+			     "this is another test \n", os.str());
 }
 
 void shiftShouldPutWordsIntoSentenceUntilEndOfLine() {

@@ -19,22 +19,13 @@ std::ostream& operator<<(std::ostream &os, std::vector<Word> const &sentence){
 }
 
 void kwic(std::istream &is, std::ostream &os){
-	std::vector<Word> sentence{};
-	std::vector<std::vector<Word>> lines{};
-	//copy lines into sentence vector
-	while(is >> sentence){
-		lines.push_back(sentence);
-		std::cout << sentence;
-		sentence.clear();
+	using input = std::istream_iterator<std::vector<Word>>;
+	std::vector<std::vector<Word>> lines (input(is), input{});
+
+	for(auto sentence : lines) {
+		auto permutations = permuteWords(sentence);
+		copy(permutations.begin(), permutations.end(), std::ostream_iterator<Word>(os, "\n"));
 	}
-	//permute each sentence and output
-	std::for_each(lines.begin(), lines.end(), [&os](std::vector<Word> sentence){
-		auto permutedVector = permuteWords(sentence);
-		std::for_each(permutedVector.begin(), permutedVector.end(), [&os](std::vector<Word> sentence){
-			os << sentence;
-			os << "\n";
-		});
-	});
 }
 
 std::vector<std::vector<Word>> permuteWords(std::vector<Word> words) {

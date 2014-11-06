@@ -156,6 +156,21 @@ void permuteMultipleSentence(){
 			     "this is another test"*/, os.str());
 }
 
+void shiftShouldPutWordsIntoSentenceUntilEndOfLine() {
+	//Arrange
+	std::istringstream is{"this is a test"};
+	std::vector<Word> sentence { };
+
+	//Act
+	is >> sentence;
+
+	//Assert
+	ASSERT_EQUAL(Word("this"), sentence.at(0));
+	ASSERT_EQUAL(Word("is"), sentence.at(1));
+	ASSERT_EQUAL(Word("a"), sentence.at(2));
+	ASSERT_EQUAL(Word("test"), sentence.at(3));
+}
+
 
 void runAllTests(int argc, char const *argv[]){
 	cute::suite s{};
@@ -171,6 +186,7 @@ void runAllTests(int argc, char const *argv[]){
 	s.push_back(CUTE(permuteSingleSentence));
 	s.push_back(CUTE(permuteMultipleSentence));
 	s.push_back(CUTE(testWordsAreSortedByStartingWord));
+	s.push_back(CUTE(shiftShouldPutWordsIntoSentenceUntilEndOfLine));
 
 	cute::xml_file_opener xmlfile(argc,argv);
 	cute::xml_listener<cute::ide_listener<> >  lis(xmlfile.out);

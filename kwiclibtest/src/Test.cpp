@@ -5,8 +5,7 @@
 #include "word.h"
 #include "kwic.h"
 
-
-void testWordShouldBeLessComparesInternalValue(){
+void testWordShouldBeLessComparesInternalValue() {
 	//Arrange
 	Word word1("abc");
 	Word word2("bcd");
@@ -14,7 +13,7 @@ void testWordShouldBeLessComparesInternalValue(){
 	ASSERT_LESS(word1, word2);
 }
 
-void testWordShouldBeLessComparesCaseInsensitive(){
+void testWordShouldBeLessComparesCaseInsensitive() {
 	//Arrange
 	Word word1("abc");
 	Word word2("BCD");
@@ -24,7 +23,7 @@ void testWordShouldBeLessComparesCaseInsensitive(){
 
 void testWordShiftLeftPrintsInternalValue() {
 	//Arrange
-	std::ostringstream out {};
+	std::ostringstream out { };
 	Word word("hallo");
 
 	//Act
@@ -37,7 +36,7 @@ void testWordShiftLeftPrintsInternalValue() {
 
 void testConstructWordThrowsInvalidArgumentExceptionForNumber() {
 	//Assert
-	ASSERT_THROWS(Word("124abd"),std::invalid_argument);
+	ASSERT_THROWS(Word("124abd"), std::invalid_argument);
 }
 
 void testConstructWordThrowsInvalidArgumentExceptionForSpecialCharacters() {
@@ -47,19 +46,19 @@ void testConstructWordThrowsInvalidArgumentExceptionForSpecialCharacters() {
 
 void testWordConsistsOfOnlyLetters() {
 	//Arrange
-	Word word {};
-	std::istringstream in {"abc123%"};
+	Word word { };
+	std::istringstream in { "abc123%" };
 	//Act
 	in >> word;
 
 	//Assert
-	ASSERT_EQUAL(std::string {"abc"}, word.value);
+	ASSERT_EQUAL(std::string { "abc" }, word.value);
 }
 
 void testWordIsEmptyIfStreamIsEmpty() {
 	//Arrange
-	Word word {};
-	std::istringstream in {"              "};
+	Word word { };
+	std::istringstream in { "              " };
 
 	//Act
 	in >> word;
@@ -68,11 +67,10 @@ void testWordIsEmptyIfStreamIsEmpty() {
 	ASSERT_EQUAL(0, word.value.length());
 }
 
-
 void testWordsAreDelimitedByNonAlphanumericCharacters() {
 	//Arrange
-	Word word1 {}, word2 {}, word3 {};
-	std::istringstream in {"compl33tely - weird ~??"};
+	Word word1 { }, word2 { }, word3 { };
+	std::istringstream in { "compl33tely - weird ~??" };
 
 	//Act
 	in >> word1;
@@ -80,11 +78,10 @@ void testWordsAreDelimitedByNonAlphanumericCharacters() {
 	in >> word3;
 
 	//Assert
-	ASSERT_EQUAL(std::string {"compl"}, word1.value);
-	ASSERT_EQUAL(std::string {"tely"}, word2.value);
-	ASSERT_EQUAL(std::string {"weird"}, word3.value);
+	ASSERT_EQUAL(std::string { "compl" }, word1.value);
+	ASSERT_EQUAL(std::string { "tely" }, word2.value);
+	ASSERT_EQUAL(std::string { "weird" }, word3.value);
 }
-
 
 void testPermuteSingleLineReturnsAllMutationsSorted() {
 	//Arrange
@@ -112,53 +109,51 @@ void testPermuteSingleLineReturnsAllMutationsSorted() {
 	}
 
 	//Assert
-	ASSERT_EQUAL(mockWord3,permuted.at(0).at(0)); // a test this is
-	ASSERT_EQUAL(mockWord4,permuted.at(0).at(1));
-	ASSERT_EQUAL(mockWord1,permuted.at(0).at(2));
-	ASSERT_EQUAL(mockWord2,permuted.at(0).at(3));
+	ASSERT_EQUAL(mockWord3, permuted.at(0).at(0)); // a test this is
+	ASSERT_EQUAL(mockWord4, permuted.at(0).at(1));
+	ASSERT_EQUAL(mockWord1, permuted.at(0).at(2));
+	ASSERT_EQUAL(mockWord2, permuted.at(0).at(3));
 
-	ASSERT_EQUAL(mockWord2,permuted.at(1).at(0)); //is a test this
-	ASSERT_EQUAL(mockWord3,permuted.at(1).at(1));
-	ASSERT_EQUAL(mockWord4,permuted.at(1).at(2));
-	ASSERT_EQUAL(mockWord1,permuted.at(1).at(3));
+	ASSERT_EQUAL(mockWord2, permuted.at(1).at(0)); //is a test this
+	ASSERT_EQUAL(mockWord3, permuted.at(1).at(1));
+	ASSERT_EQUAL(mockWord4, permuted.at(1).at(2));
+	ASSERT_EQUAL(mockWord1, permuted.at(1).at(3));
 
+	ASSERT_EQUAL(mockWord4, permuted.at(2).at(0)); // test this is a
+	ASSERT_EQUAL(mockWord1, permuted.at(2).at(1));
+	ASSERT_EQUAL(mockWord2, permuted.at(2).at(2));
+	ASSERT_EQUAL(mockWord3, permuted.at(2).at(3));
 
-	ASSERT_EQUAL(mockWord4,permuted.at(2).at(0)); // test this is a
-	ASSERT_EQUAL(mockWord1,permuted.at(2).at(1));
-	ASSERT_EQUAL(mockWord2,permuted.at(2).at(2));
-	ASSERT_EQUAL(mockWord3,permuted.at(2).at(3));
-
-	ASSERT_EQUAL(mockWord1,permuted.at(3).at(0)); // this is a test
-	ASSERT_EQUAL(mockWord2,permuted.at(3).at(1));
-	ASSERT_EQUAL(mockWord3,permuted.at(3).at(2));
-	ASSERT_EQUAL(mockWord4,permuted.at(3).at(3));
+	ASSERT_EQUAL(mockWord1, permuted.at(3).at(0)); // this is a test
+	ASSERT_EQUAL(mockWord2, permuted.at(3).at(1));
+	ASSERT_EQUAL(mockWord3, permuted.at(3).at(2));
+	ASSERT_EQUAL(mockWord4, permuted.at(3).at(3));
 }
 
-void testOermuteMultipleLinesReturnsAllMutationsSorted(){
+void testOermuteMultipleLinesReturnsAllMutationsSorted() {
 	//Arrange
-	std::istringstream is{"this is a test\n"
-						  "this is another test"
-	};
+	std::istringstream is { "this is a test\n"
+			"this is another test" };
 
-	std::ostringstream os{};
+	std::ostringstream os { };
 
 	//Act
 	kwic(is, os);
 
 	//Assert
 	ASSERT_EQUAL("a test this is \n"
-			 	 "another test this is \n"
-			     "is a test this \n"
-				 "is another test this \n"
-				 "test this is a \n"
-		     	 "test this is another \n"
-				 "this is a test \n"
-			     "this is another test \n", os.str());
+			"another test this is \n"
+			"is a test this \n"
+			"is another test this \n"
+			"test this is a \n"
+			"test this is another \n"
+			"this is a test \n"
+			"this is another test \n", os.str());
 }
 
 void testWordRightShiftPutsWordsIntoSentenceUntilEndOfLine() {
 	//Arrange
-	std::istringstream is{"this is a test"};
+	std::istringstream is { "this is a test" };
 	std::vector<Word> sentence { };
 
 	//Act
@@ -171,9 +166,8 @@ void testWordRightShiftPutsWordsIntoSentenceUntilEndOfLine() {
 	ASSERT_EQUAL(Word("test"), sentence.at(3));
 }
 
-
-void runAllTests(int argc, char const *argv[]){
-	cute::suite s{};
+void runAllTests(int argc, char const *argv[]) {
+	cute::suite s { };
 
 	s.push_back(CUTE(testWordConsistsOfOnlyLetters));
 	s.push_back(CUTE(testWordsAreDelimitedByNonAlphanumericCharacters));
@@ -187,12 +181,12 @@ void runAllTests(int argc, char const *argv[]){
 	s.push_back(CUTE(testOermuteMultipleLinesReturnsAllMutationsSorted));
 	s.push_back(CUTE(testWordRightShiftPutsWordsIntoSentenceUntilEndOfLine));
 
-	cute::xml_file_opener xmlfile(argc,argv);
-	cute::xml_listener<cute::ide_listener<> >  lis(xmlfile.out);
-	cute::makeRunner(lis,argc,argv)(s, "AllTests");
+	cute::xml_file_opener xmlfile(argc, argv);
+	cute::xml_listener<cute::ide_listener<> > lis(xmlfile.out);
+	cute::makeRunner(lis, argc, argv)(s, "AllTests");
 }
 
-int main(int argc, char const *argv[]){
-    runAllTests(argc,argv);
-    return 0;
+int main(int argc, char const *argv[]) {
+	runAllTests(argc, argv);
+	return 0;
 }

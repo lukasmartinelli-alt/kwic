@@ -1,6 +1,7 @@
 #include "kwic.h"
 #include <iterator>
 #include <sstream>
+#include <algorithm>
 
 std::istream& operator>>(std::istream &is, std::vector<Word> &sentence){
 	std::string line{};

@@ -3,11 +3,7 @@
 
 #include <string>
 #include <vector>
-#include <istream>
-#include <locale>
 #include <iostream>
-#include <ios>
-#include <algorithm>
 
 
 struct Word {

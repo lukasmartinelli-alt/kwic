@@ -2,8 +2,6 @@
 #include "ide_listener.h"
 #include "xml_listener.h"
 #include "cute_runner.h"
-#include <sstream>
-#include <stdexcept>
 #include "word.h"
 #include "kwic.h"
 

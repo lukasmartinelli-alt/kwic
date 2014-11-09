@@ -6,7 +6,7 @@
 #include "kwic.h"
 
 
-void testWordsWithLessThanOperator(){
+void testWordShouldBeLessComparesInternalValue(){
 	//Arrange
 	Word word1("abc");
 	Word word2("bcd");
@@ -14,7 +14,7 @@ void testWordsWithLessThanOperator(){
 	ASSERT_LESS(word1, word2);
 }
 
-void testWordsWithLessThanOperatorIgnoringLetterCase(){
+void testWordShouldBeLessComparesCaseInsensitive(){
 	//Arrange
 	Word word1("abc");
 	Word word2("BCD");
@@ -22,7 +22,7 @@ void testWordsWithLessThanOperatorIgnoringLetterCase(){
 	ASSERT_LESS(word1, word2);
 }
 
-void testPrintValueOfWord() {
+void testWordShiftLeftPrintsInternalValue() {
 	//Arrange
 	std::ostringstream out {};
 	Word word("hallo");
@@ -35,20 +35,20 @@ void testPrintValueOfWord() {
 
 }
 
-void constructWordThrowsInvalidArgumentExceptionForNumberInWord() {
+void testConstructWordThrowsInvalidArgumentExceptionForNumber() {
 	//Assert
 	ASSERT_THROWS(Word("124abd"),std::invalid_argument);
 }
 
-void constructWordThrowsInvalidArgumentExceptionForSpecialCharacters() {
+void testConstructWordThrowsInvalidArgumentExceptionForSpecialCharacters() {
 	//Assert
 	ASSERT_THROWS(Word("dsl!*%"), std::invalid_argument);
 }
 
-void wordConsistsOfOnlyLetters() {
+void testWordConsistsOfOnlyLetters() {
 	//Arrange
 	Word word {};
-	std::istringstream in {"abc123"};
+	std::istringstream in {"abc123%"};
 	//Act
 	in >> word;
 
@@ -56,7 +56,7 @@ void wordConsistsOfOnlyLetters() {
 	ASSERT_EQUAL(std::string {"abc"}, word.value);
 }
 
-void emptyWordIfStreamIsEmpty() {
+void testWordIsEmptyIfStreamIsEmpty() {
 	//Arrange
 	Word word {};
 	std::istringstream in {"              "};
@@ -69,7 +69,7 @@ void emptyWordIfStreamIsEmpty() {
 }
 
 
-void wordsAreDelimitedByNonAlphanumericCharacters() {
+void testWordsAreDelimitedByNonAlphanumericCharacters() {
 	//Arrange
 	Word word1 {}, word2 {}, word3 {};
 	std::istringstream in {"compl33tely - weird ~??"};
@@ -86,7 +86,7 @@ void wordsAreDelimitedByNonAlphanumericCharacters() {
 }
 
 
-void permuteSingleSentence() {
+void testPermuteSingleLineReturnsAllMutationsSorted() {
 	//Arrange
 	Word mockWord1("this");
 	Word mockWord2("is");
@@ -134,7 +134,7 @@ void permuteSingleSentence() {
 	ASSERT_EQUAL(mockWord4,permuted.at(3).at(3));
 }
 
-void permuteMultipleSentence(){
+void testOermuteMultipleLinesReturnsAllMutationsSorted(){
 	//Arrange
 	std::istringstream is{"this is a test\n"
 						  "this is another test"
@@ -156,7 +156,7 @@ void permuteMultipleSentence(){
 			     "this is another test \n", os.str());
 }
 
-void shiftShouldPutWordsIntoSentenceUntilEndOfLine() {
+void testWordRightShiftPutsWordsIntoSentenceUntilEndOfLine() {
 	//Arrange
 	std::istringstream is{"this is a test"};
 	std::vector<Word> sentence { };
@@ -175,17 +175,17 @@ void shiftShouldPutWordsIntoSentenceUntilEndOfLine() {
 void runAllTests(int argc, char const *argv[]){
 	cute::suite s{};
 
-	s.push_back(CUTE(wordConsistsOfOnlyLetters));
-	s.push_back(CUTE(wordsAreDelimitedByNonAlphanumericCharacters));
-	s.push_back(CUTE(emptyWordIfStreamIsEmpty));
-	s.push_back(CUTE(constructWordThrowsInvalidArgumentExceptionForNumberInWord));
-	s.push_back(CUTE(constructWordThrowsInvalidArgumentExceptionForSpecialCharacters));
-	s.push_back(CUTE(testPrintValueOfWord));
-	s.push_back(CUTE(testWordsWithLessThanOperator));
-	s.push_back(CUTE(testWordsWithLessThanOperatorIgnoringLetterCase));
-	s.push_back(CUTE(permuteSingleSentence));
-	s.push_back(CUTE(permuteMultipleSentence));
-	s.push_back(CUTE(shiftShouldPutWordsIntoSentenceUntilEndOfLine));
+	s.push_back(CUTE(testWordConsistsOfOnlyLetters));
+	s.push_back(CUTE(testWordsAreDelimitedByNonAlphanumericCharacters));
+	s.push_back(CUTE(testWordIsEmptyIfStreamIsEmpty));
+	s.push_back(CUTE(testConstructWordThrowsInvalidArgumentExceptionForNumber));
+	s.push_back(CUTE(testConstructWordThrowsInvalidArgumentExceptionForSpecialCharacters));
+	s.push_back(CUTE(testWordShiftLeftPrintsInternalValue));
+	s.push_back(CUTE(testWordShouldBeLessComparesInternalValue));
+	s.push_back(CUTE(testWordShouldBeLessComparesCaseInsensitive));
+	s.push_back(CUTE(testPermuteSingleLineReturnsAllMutationsSorted));
+	s.push_back(CUTE(testOermuteMultipleLinesReturnsAllMutationsSorted));
+	s.push_back(CUTE(testWordRightShiftPutsWordsIntoSentenceUntilEndOfLine));
 
 	cute::xml_file_opener xmlfile(argc,argv);
 	cute::xml_listener<cute::ide_listener<> >  lis(xmlfile.out);

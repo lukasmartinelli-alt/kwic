@@ -20,8 +20,8 @@ std::ostream& operator<<(std::ostream &os, std::vector<Word> const &sentence){
 
 void kwic(std::istream &is, std::ostream &os){
 	using input = std::istream_iterator<std::vector<Word>>;
-	std::vector<std::vector<Word>> lines (input(is), input{});
-	std::set<std::vector<Word>> permutedLines;
+	std::vector<std::vector<Word>> lines(input(is), input { });
+	std::set<std::vector<Word>> permutedLines { };
 
 	for(auto sentence : lines) {
 		auto permutations = permuteWords(sentence);

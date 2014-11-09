@@ -3,7 +3,7 @@
 
 #include <string>
 #include <vector>
-#include <iostream>
+#include <istream>
 
 
 struct Word {

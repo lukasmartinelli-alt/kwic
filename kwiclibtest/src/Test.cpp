@@ -7,16 +7,16 @@
 
 void testWordShouldBeLessComparesInternalValue() {
 	//Arrange
-	Word word1("abc");
-	Word word2("bcd");
+	const auto word1 = Word("abc");
+	const auto word2 = Word("bcd");
 	//Assert
 	ASSERT_LESS(word1, word2);
 }
 
 void testWordShouldBeLessComparesCaseInsensitive() {
 	//Arrange
-	Word word1("abc");
-	Word word2("BCD");
+	const auto word1 = Word("abc");
+	const auto word2 = Word("BCD");
 	//Assert
 	ASSERT_LESS(word1, word2);
 }
@@ -24,11 +24,9 @@ void testWordShouldBeLessComparesCaseInsensitive() {
 void testWordShiftLeftPrintsInternalValue() {
 	//Arrange
 	std::ostringstream out { };
-	Word word("hallo");
-
+	const auto word = Word("hallo");
 	//Act
 	out << word;
-
 	//Assert
 	ASSERT_EQUAL("hallo", out.str());
 
@@ -46,37 +44,34 @@ void testConstructWordThrowsInvalidArgumentExceptionForSpecialCharacters() {
 
 void testWordConsistsOfOnlyLetters() {
 	//Arrange
-	Word word { };
 	std::istringstream in { "abc123%" };
+	auto word = Word { };
 	//Act
 	in >> word;
-
 	//Assert
 	ASSERT_EQUAL(std::string { "abc" }, word.value);
 }
 
 void testWordIsEmptyIfStreamIsEmpty() {
 	//Arrange
-	Word word { };
 	std::istringstream in { "              " };
-
+	auto word = Word { };
 	//Act
 	in >> word;
-
 	//Assert
 	ASSERT_EQUAL(0, word.value.length());
 }
 
 void testWordsAreDelimitedByNonAlphanumericCharacters() {
 	//Arrange
-	Word word1 { }, word2 { }, word3 { };
 	std::istringstream in { "compl33tely - weird ~??" };
-
+	auto word1 = Word { };
+	auto word2 = Word { };
+	auto word3 = Word { };
 	//Act
 	in >> word1;
 	in >> word2;
 	in >> word3;
-
 	//Assert
 	ASSERT_EQUAL(std::string { "compl" }, word1.value);
 	ASSERT_EQUAL(std::string { "tely" }, word2.value);
@@ -85,24 +80,21 @@ void testWordsAreDelimitedByNonAlphanumericCharacters() {
 
 void testPermuteSingleLineReturnsAllMutationsSorted() {
 	//Arrange
-	Word mockWord1("this");
-	Word mockWord2("is");
-	Word mockWord3("a");
-	Word mockWord4("test");
-	Word word1 { }, word2 { }, word3 { }, word4 { };
-	std::istringstream in { "this is a test" };
+	const auto mockWord1 = Word("this");
+	const auto mockWord2 = Word("is");
+	const auto mockWord3 = Word("a");
+	const auto mockWord4 = Word("test");
 
-	in >> word1;
-	in >> word2;
-	in >> word3;
-	in >> word4;
+	const auto word1 = Word("this");
+	const auto word2 = Word("is");
+	const auto word3 = Word("a");
+	const auto word4 = Word("test");
 
-	std::vector<Word> words { word1, word2, word3, word4 };
+	auto words = std::vector<Word> { word1, word2, word3, word4 };
 
 	//Act
-	std::set<std::vector<Word>> permutedWords = permuteWords(words);
-
-	std::vector<std::vector<Word>> permuted { };
+	const auto permutedWords = permuteWords(words);
+	auto permuted = std::vector<std::vector<Word>> { };
 
 	for (auto word : permutedWords) {
 		permuted.push_back(word);
@@ -132,33 +124,28 @@ void testPermuteSingleLineReturnsAllMutationsSorted() {
 
 void testOermuteMultipleLinesReturnsAllMutationsSorted() {
 	//Arrange
-	std::istringstream is { "this is a test\n"
-			"this is another test" };
-
-	std::ostringstream os { };
-
+	std::istringstream in { "this is a test\n"
+							"this is another test" };
+	std::ostringstream out { };
 	//Act
-	kwic(is, os);
-
+	kwic(in, out);
 	//Assert
 	ASSERT_EQUAL("a test this is \n"
-			"another test this is \n"
-			"is a test this \n"
-			"is another test this \n"
-			"test this is a \n"
-			"test this is another \n"
-			"this is a test \n"
-			"this is another test \n", os.str());
+                 "another test this is \n"
+                 "is a test this \n"
+                 "is another test this \n"
+                 "test this is a \n"
+                 "test this is another \n"
+                 "this is a test \n"
+                 "this is another test \n", out.str());
 }
 
 void testWordRightShiftPutsWordsIntoSentenceUntilEndOfLine() {
 	//Arrange
-	std::istringstream is { "this is a test" };
-	std::vector<Word> sentence { };
-
+	std::istringstream in { "this is a test" };
+	auto sentence = std::vector<Word> { };
 	//Act
-	is >> sentence;
-
+	in >> sentence;
 	//Assert
 	ASSERT_EQUAL(Word("this"), sentence.at(0));
 	ASSERT_EQUAL(Word("is"), sentence.at(1));

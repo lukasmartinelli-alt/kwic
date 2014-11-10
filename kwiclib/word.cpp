@@ -3,13 +3,13 @@
 #include <algorithm>
 #include <cctype>
 
-Word::Word(std::string val) : value { val } {
+Word::Word(const std::string val) : value { val } {
 	if (!std::all_of(value.begin(), value.end(), ::isalpha)) {
 		throw std::invalid_argument("Word must only contain of alphabetical characters");
 	}
 }
 
-bool compareLowerCaseCharacters(char c1, char c2) {
+bool compareLowerCaseCharacters(const char c1, const char c2) {
 	return std::tolower(c1) < std::tolower(c2);
 }
 

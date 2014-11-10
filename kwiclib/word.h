@@ -5,6 +5,8 @@
 #include <vector>
 #include <istream>
 
+namespace kwic {
+
 struct Word {
 	std::string value;
 	explicit Word(const std::string value);
@@ -18,6 +20,11 @@ struct Word {
 	bool operator >=(const Word& word) const;
 
 };
+
+/*
+constexpr std::string operator"" _word(const char * str, size_t len) {
+	return std::string {str, len};
+}*/
 
 inline std::istream& operator>>(std::istream& lhs, Word & rhs) {
 	char c { };
@@ -38,9 +45,13 @@ inline std::istream& operator>>(std::istream& lhs, Word & rhs) {
 	return lhs;
 }
 
+
+
 inline std::ostream& operator<<(std::ostream& out, Word const& word) {
 	out << word.value;
 	return out;
+}
+
 }
 
 #endif

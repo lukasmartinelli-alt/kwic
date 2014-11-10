@@ -1,6 +1,5 @@
 #include "kwic.h"
 #include <iostream>
-
 int main() {
-	kwic(std::cin, std::cout);
+	kwic::permuteLines(std::cin, std::cout);
 }

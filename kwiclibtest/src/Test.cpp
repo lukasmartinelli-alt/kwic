@@ -4,6 +4,7 @@
 #include "cute_runner.h"
 #include "word.h"
 #include "kwic.h"
+using namespace kwic;
 
 void testWordShouldBeLessComparesInternalValue() {
 	//Arrange
@@ -122,13 +123,13 @@ void testPermuteSingleLineReturnsAllMutationsSorted() {
 	ASSERT_EQUAL(mockWord4, permuted.at(3).at(3));
 }
 
-void testOermuteMultipleLinesReturnsAllMutationsSorted() {
+void testPermuteMultipleLinesReturnsAllMutationsSorted() {
 	//Arrange
 	std::istringstream in { "this is a test\n"
 							"this is another test" };
 	std::ostringstream out { };
 	//Act
-	kwic(in, out);
+	permuteLines(in, out);
 	//Assert
 	ASSERT_EQUAL("a test this is \n"
                  "another test this is \n"
@@ -165,7 +166,7 @@ void runAllTests(int argc, char const *argv[]) {
 	s.push_back(CUTE(testWordShouldBeLessComparesInternalValue));
 	s.push_back(CUTE(testWordShouldBeLessComparesCaseInsensitive));
 	s.push_back(CUTE(testPermuteSingleLineReturnsAllMutationsSorted));
-	s.push_back(CUTE(testOermuteMultipleLinesReturnsAllMutationsSorted));
+	s.push_back(CUTE(testPermuteMultipleLinesReturnsAllMutationsSorted));
 	s.push_back(CUTE(testWordRightShiftPutsWordsIntoSentenceUntilEndOfLine));
 
 	cute::xml_file_opener xmlfile(argc, argv);

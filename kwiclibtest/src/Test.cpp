@@ -82,7 +82,7 @@ void testWordsAreDelimitedByNonAlphanumericCharacters() {
 	ASSERT_EQUAL(std::string { "put" }, word6.value);
 }
 
-void testRotateSingleLineReturnsAllMutationsSorted() {
+void testRotateSingleLineReturnsAllRotationsSorted() {
 	//Arrange
 	const Word mockWord1("this");
 	const Word mockWord2("is");
@@ -116,7 +116,7 @@ void testRotateSingleLineReturnsAllMutationsSorted() {
 	ASSERT_EQUAL(expected4, permuted.at(3));
 }
 
-void testRotateMultipleLinesReturnsAllMutationsSorted() {
+void testRotateMultipleLinesReturnsAllRotationsSorted() {
 	//Arrange
 	std::istringstream in { "this is a test\n"
 							"this is another test" };
@@ -158,8 +158,8 @@ void runAllTests(int argc, char const *argv[]) {
 	s.push_back(CUTE(testWordShiftLeftPrintsInternalValue));
 	s.push_back(CUTE(testWordShouldBeLessComparesInternalValue));
 	s.push_back(CUTE(testWordShouldBeLessComparesCaseInsensitive));
-	s.push_back(CUTE(testRotateSingleLineReturnsAllMutationsSorted));
-	s.push_back(CUTE(testRotateMultipleLinesReturnsAllMutationsSorted));
+	s.push_back(CUTE(testRotateSingleLineReturnsAllRotationsSorted));
+	s.push_back(CUTE(testRotateMultipleLinesReturnsAllRotationsSorted));
 	s.push_back(CUTE(testWordRightShiftPutsWordsIntoSentenceUntilEndOfLine));
 
 	cute::xml_file_opener xmlfile(argc, argv);

@@ -3,6 +3,7 @@
 
 #include "word.h"
 #include <set>
+#include <vector>
 
 std::istream& operator>>(std::istream &is, std::vector<Word> &sentence);
 void rotateLines(std::istream &is, std::ostream &os);

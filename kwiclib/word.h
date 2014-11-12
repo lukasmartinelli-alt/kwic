@@ -2,13 +2,12 @@
 #define WORD_H_
 
 #include <string>
-#include <vector>
 #include <istream>
 
 struct Word {
 	std::string value;
-	explicit Word(const std::string value);
-	Word() = default;
+
+	explicit Word(const std::string value="");
 
 	bool operator ==(const Word& word) const;
 	bool operator !=(const Word& word) const;

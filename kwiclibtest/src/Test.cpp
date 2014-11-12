@@ -7,16 +7,16 @@
 
 void testWordShouldBeLessComparesInternalValue() {
 	//Arrange
-	const auto word1 = Word("abc");
-	const auto word2 = Word("bcd");
+	const Word word1("abc");
+	const Word word2("bcd");
 	//Assert
 	ASSERT_LESS(word1, word2);
 }
 
 void testWordShouldBeLessComparesCaseInsensitive() {
 	//Arrange
-	const auto word1 = Word("abc");
-	const auto word2 = Word("BCD");
+	const Word word1("abc");
+	const Word word2("BCD");
 	//Assert
 	ASSERT_LESS(word1, word2);
 }
@@ -24,7 +24,7 @@ void testWordShouldBeLessComparesCaseInsensitive() {
 void testWordShiftLeftPrintsInternalValue() {
 	//Arrange
 	std::ostringstream out { };
-	const auto word = Word("hallo");
+	const Word word("hallo");
 	//Act
 	out << word;
 	//Assert
@@ -45,7 +45,7 @@ void testConstructWordThrowsInvalidArgumentExceptionForSpecialCharacters() {
 void testWordConsistsOfOnlyLetters() {
 	//Arrange
 	std::istringstream in { "abc123%" };
-	auto word = Word { };
+	Word word { };
 	//Act
 	in >> word;
 	//Assert
@@ -55,7 +55,7 @@ void testWordConsistsOfOnlyLetters() {
 void testWordIsEmptyIfStreamIsEmpty() {
 	//Arrange
 	std::istringstream in { "              " };
-	auto word = Word { };
+	Word word { };
 	//Act
 	in >> word;
 	//Assert
@@ -100,19 +100,19 @@ void testRotateSingleLineReturnsAllMutationsSorted() {
 	}
 
 	//Assert
-	auto expected1 = std::vector<Word> { mockWord3, mockWord4, mockWord1, mockWord2 };
+	const std::vector<Word> expected1 { mockWord3, mockWord4, mockWord1, mockWord2 };
 	ASSERT_EQUAL(expected1, permuted.at(0));
 
 
-	auto expected2 = std::vector<Word> { mockWord2, mockWord3, mockWord4, mockWord1 };
+	const std::vector<Word> expected2 { mockWord2, mockWord3, mockWord4, mockWord1 };
 	ASSERT_EQUAL(expected2, permuted.at(1));
 
 
-	auto expected3 = std::vector<Word> { mockWord4, mockWord1, mockWord2, mockWord3 };
+	const std::vector<Word> expected3 { mockWord4, mockWord1, mockWord2, mockWord3 };
 	ASSERT_EQUAL(expected3, permuted.at(2));
 
 
-	auto expected4 = std::vector<Word> { mockWord1, mockWord2, mockWord3, mockWord4 };
+	const std::vector<Word> expected4 { mockWord1, mockWord2, mockWord3, mockWord4 };
 	ASSERT_EQUAL(expected4, permuted.at(3));
 }
 
@@ -137,7 +137,7 @@ void testRotateMultipleLinesReturnsAllMutationsSorted() {
 void testWordRightShiftPutsWordsIntoSentenceUntilEndOfLine() {
 	//Arrange
 	std::istringstream in { "this is a test" };
-	auto sentence = std::vector<Word> { };
+	std::vector<Word> sentence { };
 	//Act
 	in >> sentence;
 	//Assert

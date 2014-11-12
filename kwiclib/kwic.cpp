@@ -5,7 +5,7 @@
 
 std::istream& operator>>(std::istream &is, std::vector<Word> &sentence) {
 	using input = std::istream_iterator<Word>;
-	auto line = std::string { };
+	std::string line { };
 	if (getline(is, line)) {
 		std::istringstream lineStream { line };
 		sentence = std::vector<Word>(input(lineStream), input { });
@@ -20,8 +20,8 @@ std::ostream& operator<<(std::ostream &os, std::vector<Word> const &sentence) {
 
 void rotateLines(std::istream &is, std::ostream &os) {
 	using input = std::istream_iterator<std::vector<Word>>;
-	const auto lines = std::vector<std::vector<Word>>(input(is), input { });
-	auto rotateddLines = std::set<std::vector<Word>> { };
+	const std::vector<std::vector<Word>> lines(input(is), input { });
+	std::set<std::vector<Word>> rotateddLines{ };
 
 	for (auto sentence : lines) {
 		auto rotations = rotateWords(sentence);
@@ -34,7 +34,7 @@ void rotateLines(std::istream &is, std::ostream &os) {
 }
 
 std::set<std::vector<Word>> rotateWords(std::vector<Word> words) {
-	auto rotations = std::set<std::vector<Word>> { };
+	std::set<std::vector<Word>> rotations { };
 
 	for (auto _ : words) {
 		std::rotate(words.begin(), words.begin() + 1, words.end());

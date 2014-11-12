@@ -4,7 +4,6 @@
 #include "cute_runner.h"
 #include "word.h"
 #include "kwic.h"
-using namespace kwic;
 
 void testWordShouldBeLessComparesInternalValue() {
 	//Arrange

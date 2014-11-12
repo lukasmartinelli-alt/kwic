@@ -64,33 +64,32 @@ void testWordIsEmptyIfStreamIsEmpty() {
 
 void testWordsAreDelimitedByNonAlphanumericCharacters() {
 	//Arrange
-	std::istringstream in { "compl33tely - weird ~??" };
-	auto word1 = Word { };
-	auto word2 = Word { };
-	auto word3 = Word { };
+	std::istringstream in { "compl33tely ~ weird !!??!! 4matted in_put" };
+	Word word1 { }, word2 { }, word3 { }, word4 { }, word5 { }, word6 { };
 	//Act
 	in >> word1;
 	in >> word2;
 	in >> word3;
+	in >> word4;
+	in >> word5;
+	in >> word6;
 	//Assert
 	ASSERT_EQUAL(std::string { "compl" }, word1.value);
 	ASSERT_EQUAL(std::string { "tely" }, word2.value);
 	ASSERT_EQUAL(std::string { "weird" }, word3.value);
+	ASSERT_EQUAL(std::string { "matted" }, word4.value);
+	ASSERT_EQUAL(std::string { "in" }, word5.value);
+	ASSERT_EQUAL(std::string { "put" }, word6.value);
 }
 
 void testRotateSingleLineReturnsAllMutationsSorted() {
 	//Arrange
-	const auto mockWord1 = Word("this");
-	const auto mockWord2 = Word("is");
-	const auto mockWord3 = Word("a");
-	const auto mockWord4 = Word("test");
+	const Word mockWord1("this");
+	const Word mockWord2("is");
+	const Word mockWord3("a");
+	const Word mockWord4("test");
 
-	const auto word1 = Word("this");
-	const auto word2 = Word("is");
-	const auto word3 = Word("a");
-	const auto word4 = Word("test");
-
-	auto words = std::vector<Word> { word1, word2, word3, word4 };
+	const std::vector<Word> words { Word("this"), Word("is"), Word("a"), Word("test") };
 
 	//Act
 	const auto rotatedWords = rotateWords(words);
@@ -101,25 +100,20 @@ void testRotateSingleLineReturnsAllMutationsSorted() {
 	}
 
 	//Assert
-	ASSERT_EQUAL(mockWord3, permuted.at(0).at(0)); // a test this is
-	ASSERT_EQUAL(mockWord4, permuted.at(0).at(1));
-	ASSERT_EQUAL(mockWord1, permuted.at(0).at(2));
-	ASSERT_EQUAL(mockWord2, permuted.at(0).at(3));
+	auto expected1 = std::vector<Word> { mockWord3, mockWord4, mockWord1, mockWord2 };
+	ASSERT_EQUAL(expected1, permuted.at(0));
 
-	ASSERT_EQUAL(mockWord2, permuted.at(1).at(0)); //is a test this
-	ASSERT_EQUAL(mockWord3, permuted.at(1).at(1));
-	ASSERT_EQUAL(mockWord4, permuted.at(1).at(2));
-	ASSERT_EQUAL(mockWord1, permuted.at(1).at(3));
 
-	ASSERT_EQUAL(mockWord4, permuted.at(2).at(0)); // test this is a
-	ASSERT_EQUAL(mockWord1, permuted.at(2).at(1));
-	ASSERT_EQUAL(mockWord2, permuted.at(2).at(2));
-	ASSERT_EQUAL(mockWord3, permuted.at(2).at(3));
+	auto expected2 = std::vector<Word> { mockWord2, mockWord3, mockWord4, mockWord1 };
+	ASSERT_EQUAL(expected2, permuted.at(1));
 
-	ASSERT_EQUAL(mockWord1, permuted.at(3).at(0)); // this is a test
-	ASSERT_EQUAL(mockWord2, permuted.at(3).at(1));
-	ASSERT_EQUAL(mockWord3, permuted.at(3).at(2));
-	ASSERT_EQUAL(mockWord4, permuted.at(3).at(3));
+
+	auto expected3 = std::vector<Word> { mockWord4, mockWord1, mockWord2, mockWord3 };
+	ASSERT_EQUAL(expected3, permuted.at(2));
+
+
+	auto expected4 = std::vector<Word> { mockWord1, mockWord2, mockWord3, mockWord4 };
+	ASSERT_EQUAL(expected4, permuted.at(3));
 }
 
 void testRotateMultipleLinesReturnsAllMutationsSorted() {

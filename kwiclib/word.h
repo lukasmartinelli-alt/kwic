@@ -17,7 +17,7 @@ struct Word {
 	}
 
 	inline bool operator >(const Word& word) const {
-		return word.value < value;
+		return word < *this;
 	}
 
 	inline bool operator <=(const Word& word) const {

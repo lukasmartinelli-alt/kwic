@@ -9,12 +9,32 @@ struct Word {
 
 	explicit Word(const std::string value="");
 
-	bool operator ==(const Word& word) const;
-	bool operator !=(const Word& word) const;
-	bool operator <(const Word& word) const;
-	bool operator >(const Word& word) const;
-	bool operator <=(const Word& word) const;
-	bool operator >=(const Word& word) const;
+	inline bool operator <(const Word& word) const {
+		auto compareLowerCaseCharacters = [](const char c1, const char c2) {
+			return std::tolower(c1) < std::tolower(c2);
+		};
+		return std::lexicographical_compare(this->value.begin(), this->value.end(), word.value.begin(), word.value.end(), compareLowerCaseCharacters);
+	}
+
+	inline bool operator >(const Word& word) const {
+		return word.value < value;
+	}
+
+	inline bool operator <=(const Word& word) const {
+		return !(word < *this);
+	}
+
+	inline bool operator >=(const Word& word) const {
+		return !(*this < word);
+	}
+
+	inline bool operator ==(const Word& word) const {
+		return !(*this < word) && !(word < *this);
+	}
+
+	inline bool operator !=(const Word& word) const {
+		return !(*this == word);
+	}
 };
 
 inline std::istream& operator>>(std::istream& lhs, Word & rhs) {

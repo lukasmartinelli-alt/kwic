@@ -5,7 +5,7 @@
 #include <set>
 
 std::istream& operator>>(std::istream &is, std::vector<Word> &sentence);
-void permuteLines(std::istream &is, std::ostream &os);
-std::set<std::vector<Word>> permuteWords(std::vector<Word> words);
+void rotateLines(std::istream &is, std::ostream &os);
+std::set<std::vector<Word>> rotateWords(std::vector<Word> words);
 
 #endif

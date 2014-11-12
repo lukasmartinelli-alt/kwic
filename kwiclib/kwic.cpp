@@ -18,30 +18,30 @@ std::ostream& operator<<(std::ostream &os, std::vector<Word> const &sentence) {
 	return os;
 }
 
-void permuteLines(std::istream &is, std::ostream &os) {
+void rotateLines(std::istream &is, std::ostream &os) {
 	using input = std::istream_iterator<std::vector<Word>>;
 	const auto lines = std::vector<std::vector<Word>>(input(is), input { });
-	auto permutedLines = std::set<std::vector<Word>> { };
+	auto rotateddLines = std::set<std::vector<Word>> { };
 
 	for (auto sentence : lines) {
-		auto permutations = permuteWords(sentence);
-		permutedLines.insert(permutations.begin(), permutations.end());
+		auto rotations = rotateWords(sentence);
+		rotateddLines.insert(rotations.begin(), rotations.end());
 	}
 
-	for (auto lines : permutedLines) {
+	for (auto lines : rotateddLines) {
 		os << lines << "\n";
 	}
 }
 
-std::set<std::vector<Word>> permuteWords(std::vector<Word> words) {
-	auto permutations = std::set<std::vector<Word>> { };
+std::set<std::vector<Word>> rotateWords(std::vector<Word> words) {
+	auto rotations = std::set<std::vector<Word>> { };
 
 	for (auto _ : words) {
 		std::rotate(words.begin(), words.begin() + 1, words.end());
-		permutations.insert(words);
+		rotations.insert(words);
 	}
 
-	return permutations;
+	return rotations;
 }
 
 

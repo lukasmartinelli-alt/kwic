@@ -78,7 +78,7 @@ void testWordsAreDelimitedByNonAlphanumericCharacters() {
 	ASSERT_EQUAL(std::string { "weird" }, word3.value);
 }
 
-void testPermuteSingleLineReturnsAllMutationsSorted() {
+void testRotateSingleLineReturnsAllMutationsSorted() {
 	//Arrange
 	const auto mockWord1 = Word("this");
 	const auto mockWord2 = Word("is");
@@ -93,10 +93,10 @@ void testPermuteSingleLineReturnsAllMutationsSorted() {
 	auto words = std::vector<Word> { word1, word2, word3, word4 };
 
 	//Act
-	const auto permutedWords = permuteWords(words);
+	const auto rotatedWords = rotateWords(words);
 	auto permuted = std::vector<std::vector<Word>> { };
 
-	for (auto word : permutedWords) {
+	for (auto word : rotatedWords) {
 		permuted.push_back(word);
 	}
 
@@ -122,13 +122,13 @@ void testPermuteSingleLineReturnsAllMutationsSorted() {
 	ASSERT_EQUAL(mockWord4, permuted.at(3).at(3));
 }
 
-void testPermuteMultipleLinesReturnsAllMutationsSorted() {
+void testRotateMultipleLinesReturnsAllMutationsSorted() {
 	//Arrange
 	std::istringstream in { "this is a test\n"
 							"this is another test" };
 	std::ostringstream out { };
 	//Act
-	permuteLines(in, out);
+	rotateLines(in, out);
 	//Assert
 	ASSERT_EQUAL("a test this is \n"
                  "another test this is \n"
@@ -164,8 +164,8 @@ void runAllTests(int argc, char const *argv[]) {
 	s.push_back(CUTE(testWordShiftLeftPrintsInternalValue));
 	s.push_back(CUTE(testWordShouldBeLessComparesInternalValue));
 	s.push_back(CUTE(testWordShouldBeLessComparesCaseInsensitive));
-	s.push_back(CUTE(testPermuteSingleLineReturnsAllMutationsSorted));
-	s.push_back(CUTE(testPermuteMultipleLinesReturnsAllMutationsSorted));
+	s.push_back(CUTE(testRotateSingleLineReturnsAllMutationsSorted));
+	s.push_back(CUTE(testRotateMultipleLinesReturnsAllMutationsSorted));
 	s.push_back(CUTE(testWordRightShiftPutsWordsIntoSentenceUntilEndOfLine));
 
 	cute::xml_file_opener xmlfile(argc, argv);

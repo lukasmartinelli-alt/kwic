@@ -134,17 +134,6 @@ void testRotateMultipleLinesReturnsAllRotationsSorted() {
                  "this is another test \n", out.str());
 }
 
-void testWordRightShiftPutsWordsIntoSentenceUntilEndOfLine() {
-	//Arrange
-	std::istringstream in { "this is a test" };
-	std::vector<Word> sentence { };
-	//Act
-	in >> sentence;
-	//Assert
-	const std::vector<Word> expected { Word("this"), Word("is"), Word("a"), Word("test") };
-	ASSERT_EQUAL(expected, sentence);
-}
-
 void runAllTests(int argc, char const *argv[]) {
 	cute::suite s { };
 
@@ -158,7 +147,6 @@ void runAllTests(int argc, char const *argv[]) {
 	s.push_back(CUTE(testWordShouldBeLessComparesCaseInsensitive));
 	s.push_back(CUTE(testRotateSingleLineReturnsAllRotationsSorted));
 	s.push_back(CUTE(testRotateMultipleLinesReturnsAllRotationsSorted));
-	s.push_back(CUTE(testWordRightShiftPutsWordsIntoSentenceUntilEndOfLine));
 
 	cute::xml_file_opener xmlfile(argc, argv);
 	cute::xml_listener<cute::ide_listener<> > lis(xmlfile.out);

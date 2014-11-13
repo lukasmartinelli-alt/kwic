@@ -29,7 +29,9 @@ struct Word {
 	}
 
 	inline bool operator ==(const Word& word) const {
-		return !(*this < word) && !(word < *this);
+		return std::equal(this->value.begin(), this->value.end(), word.value.begin(), [](const char c1, const char c2) {
+			return std::tolower(c1) == std::tolower(c2);
+		});
 	}
 
 	inline bool operator !=(const Word& word) const {

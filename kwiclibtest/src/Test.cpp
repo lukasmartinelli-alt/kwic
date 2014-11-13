@@ -141,10 +141,8 @@ void testWordRightShiftPutsWordsIntoSentenceUntilEndOfLine() {
 	//Act
 	in >> sentence;
 	//Assert
-	ASSERT_EQUAL(Word("this"), sentence.at(0));
-	ASSERT_EQUAL(Word("is"), sentence.at(1));
-	ASSERT_EQUAL(Word("a"), sentence.at(2));
-	ASSERT_EQUAL(Word("test"), sentence.at(3));
+	const std::vector<Word> expected { Word("this"), Word("is"), Word("a"), Word("test") };
+	ASSERT_EQUAL(expected, sentence);
 }
 
 void runAllTests(int argc, char const *argv[]) {

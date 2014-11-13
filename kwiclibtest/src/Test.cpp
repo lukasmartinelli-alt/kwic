@@ -49,7 +49,7 @@ void testWordConsistsOfOnlyLetters() {
 	//Act
 	in >> word;
 	//Assert
-	ASSERT_EQUAL(std::string { "abc" }, word.value);
+	ASSERT_EQUAL(Word("abc"), word);
 }
 
 void testWordIsEmptyIfStreamIsEmpty() {
@@ -59,7 +59,7 @@ void testWordIsEmptyIfStreamIsEmpty() {
 	//Act
 	in >> word;
 	//Assert
-	ASSERT_EQUAL(0, word.value.length());
+	ASSERT_EQUAL(Word(""), word);
 }
 
 void testWordsAreDelimitedByNonAlphanumericCharacters() {
@@ -74,12 +74,12 @@ void testWordsAreDelimitedByNonAlphanumericCharacters() {
 	in >> word5;
 	in >> word6;
 	//Assert
-	ASSERT_EQUAL(std::string { "compl" }, word1.value);
-	ASSERT_EQUAL(std::string { "tely" }, word2.value);
-	ASSERT_EQUAL(std::string { "weird" }, word3.value);
-	ASSERT_EQUAL(std::string { "matted" }, word4.value);
-	ASSERT_EQUAL(std::string { "in" }, word5.value);
-	ASSERT_EQUAL(std::string { "put" }, word6.value);
+	ASSERT_EQUAL(Word("compl"), word1);
+	ASSERT_EQUAL(Word("tely"), word2);
+	ASSERT_EQUAL(Word("weird"), word3);
+	ASSERT_EQUAL(Word("matted"), word4);
+	ASSERT_EQUAL(Word("in"), word5);
+	ASSERT_EQUAL(Word("put"), word6);
 }
 
 void testRotateSingleLineReturnsAllRotationsSorted() {

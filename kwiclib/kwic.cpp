@@ -21,14 +21,14 @@ std::ostream& operator<<(std::ostream &os, std::vector<Word> const &sentence) {
 void rotateLines(std::istream &is, std::ostream &os) {
 	using input = std::istream_iterator<std::vector<Word>>;
 	const std::vector<std::vector<Word>> lines(input(is), input { });
-	std::set<std::vector<Word>> rotateddLines{ };
+	std::set<std::vector<Word>> rotatedLines{ };
 
 	for (auto sentence : lines) {
 		auto rotations = rotateWords(sentence);
-		rotateddLines.insert(rotations.begin(), rotations.end());
+		rotatedLines.insert(rotations.begin(), rotations.end());
 	}
 
-	for (auto lines : rotateddLines) {
+	for (auto lines : rotatedLines) {
 		os << lines << "\n";
 	}
 }

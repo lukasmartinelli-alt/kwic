@@ -2,18 +2,18 @@
 #define WORD_H_
 
 #include <string>
-#include <istream>
+#include <iosfwd>
 
 struct Word {
-	std::string value;
-
 	explicit Word(const std::string value="");
 
+	void read(std::istream& in);
+	void print(std::ostream& out) const;
+
 	inline bool operator <(const Word& word) const {
-		auto compareLowerCaseCharacters = [](const char c1, const char c2) {
-			return std::tolower(c1) < std::tolower(c2);
-		};
-		return std::lexicographical_compare(this->value.begin(), this->value.end(), word.value.begin(), word.value.end(), compareLowerCaseCharacters);
+		return std::lexicographical_compare(this->value.begin(), this->value.end(),
+											word.value.begin(), word.value.end(),
+											compareLowerCaseCharacters);
 	}
 
 	inline bool operator >(const Word& word) const {
@@ -35,29 +35,22 @@ struct Word {
 	inline bool operator !=(const Word& word) const {
 		return !(*this == word);
 	}
+
+private:
+	std::string value;
+	static bool compareLowerCaseCharacters(const char c1, const char c2) {
+		return std::tolower(c1) < std::tolower(c2);
+	}
+
 };
 
-inline std::istream& operator>>(std::istream& lhs, Word & rhs) {
-	char c { };
-	rhs.value.clear();
-
-	while (lhs.get(c)) {
-		if (std::isalpha(c)) {
-			rhs.value += c;
-		} else if (!rhs.value.empty()) {
-			break;
-		}
-	}
-
-	if (!rhs.value.empty()) {
-		lhs.clear();
-	}
-
-	return lhs;
+inline std::istream& operator>>(std::istream& in, Word & word) {
+	word.read(in);
+	return in;
 }
 
-inline std::ostream& operator<<(std::ostream& out, Word const& word) {
-	out << word.value;
+inline std::ostream& operator<<(std::ostream& out, const Word& word) {
+	word.print(out);
 	return out;
 }
 
